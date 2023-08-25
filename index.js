@@ -15,7 +15,7 @@ let secs = 0;
 
 //Start button
 startBtn.addEventListener("click", () => {
-  if (paused) {
+  if (paused && timeDisplay.textContent === "00:00:00") {
     paused = false;
     startTime = Date.now();
     intervalId = setInterval(updateTime, 1000);
