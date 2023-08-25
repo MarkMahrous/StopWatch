@@ -20,7 +20,20 @@ startBtn.addEventListener("click", () => {
     intervalId = setInterval(updateTime, 1000);
   }
 });
-pauseBtn.addEventListener("click", () => {});
+
+pauseBtn.addEventListener("click", () => {
+  if (!paused) {
+    paused = true;
+    clearInterval(intervalId);
+    pauseBtn.textContent = "Resume";
+  } else {
+    paused = false;
+    startTime = Date.now() - elapsedTime;
+    intervalId = setInterval(updateTime, 1000);
+    pauseBtn.textContent = "Pause";
+  }
+});
+
 resetBtn.addEventListener("click", () => {});
 
 function updateTime() {
