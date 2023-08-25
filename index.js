@@ -13,6 +13,7 @@ let hrs = 0;
 let mins = 0;
 let secs = 0;
 
+//Start button
 startBtn.addEventListener("click", () => {
   if (paused) {
     paused = false;
@@ -21,21 +22,37 @@ startBtn.addEventListener("click", () => {
   }
 });
 
+//Pause button
 pauseBtn.addEventListener("click", () => {
-  if (!paused) {
-    paused = true;
-    clearInterval(intervalId);
-    pauseBtn.textContent = "Resume";
-  } else {
-    paused = false;
-    startTime = Date.now() - elapsedTime;
-    intervalId = setInterval(updateTime, 1000);
-    pauseBtn.textContent = "Pause";
+  if (!(timeDisplay.textContent === "00:00:00")) {
+    if (!paused) {
+      paused = true;
+      clearInterval(intervalId);
+      pauseBtn.textContent = "Resume";
+    } else {
+      paused = false;
+      startTime = Date.now() - elapsedTime;
+      intervalId = setInterval(updateTime, 1000);
+      pauseBtn.textContent = "Pause";
+    }
   }
 });
 
-resetBtn.addEventListener("click", () => {});
+//Reset button
+resetBtn.addEventListener("click", () => {
+  if (paused) {
+    pauseBtn.textContent = "Pause";
+  } else {
+    paused = true;
+  }
+  startTime = 0;
+  elapsedTime = 0;
+  currentTime = 0;
+  clearInterval(intervalId);
+  timeDisplay.textContent = "00:00:00";
+});
 
+//Update time
 function updateTime() {
   elapsedTime = Date.now() - startTime;
 
