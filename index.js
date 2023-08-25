@@ -27,8 +27,17 @@ function updateTime() {
   elapsedTime = Date.now() - startTime;
 
   secs = Math.floor((elapsedTime / 1000) % 60);
+  secs = addZeros(secs);
   mins = Math.floor((elapsedTime / (1000 * 60)) % 60);
+  mins = addZeros(mins);
   hrs = Math.floor((elapsedTime / (1000 * 60 * 60)) % 24);
+  hrs = addZeros(hrs);
 
   timeDisplay.textContent = `${hrs}:${mins}:${secs}`;
+  function addZeros(time) {
+    if (time < 10) {
+      return `0${time}`;
+    }
+    return time;
+  }
 }
